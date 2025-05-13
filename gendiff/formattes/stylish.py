@@ -1,12 +1,17 @@
 def format_stylish(diff_tree, depth=0):
     def stringify(value, depth):
-        if not isinstance(value, dict):
-            return str(value).lower() if isinstance(value, bool) or value is None else str(value)
-        lines = []
-        indent = ' ' * (depth * 4)
-        for k, v in value.items():
-            lines.append(f"{indent}    {k}: {stringify(v, depth + 1)}")
-        return f"{{\n" + '\n'.join(lines) + f"\n{indent}}}"
+        if isinstance(value, dict):
+            lines = []
+            indent = ' ' * (depth * 4)
+            closing_indent = ' ' * ((depth - 1) * 4)
+            for k, v in value.items():
+                lines.append(f"{indent}    {k}: {stringify(v, depth + 1)}")
+            return f"{{\n" + '\n'.join(lines) + f"\n{closing_indent}    }}"
+        if value is None:
+            return 'null'
+        if isinstance(value, bool):
+            return str(value).lower()
+        return str(value)
 
     indent = ' ' * (depth * 4)
     result = []
@@ -25,5 +30,5 @@ def format_stylish(diff_tree, depth=0):
             result.append(f"{indent}  + {key}: {stringify(item['new_value'], depth + 1)}")
         elif type_ == "nested":
             children = format_stylish(item['children'], depth + 1)
-            result.append(f"{indent}    {key}: {{\n{children}\n{indent}    }}")
+            result.append(f"{indent}    {key}: {children}")
     return "{\n" + "\n".join(result) + f"\n{indent}}}"
