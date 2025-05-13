@@ -1,8 +1,9 @@
 from .parse_file import parse_file
 from .diff_builder import build_diff
-from gendiff.formattes.stylish import  format_stylish
+from gendiff.formattes.stylish import format_stylish
 from gendiff.formattes.plain import format_plain
 from gendiff.formattes.json import format_json
+
 
 def generate_diff(file_path1, file_path2, format_name='stylish'):
     data1 = parse_file(file_path1)

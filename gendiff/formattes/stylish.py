@@ -6,7 +6,7 @@ def format_stylish(diff_tree, depth=0):
             closing_indent = ' ' * ((depth - 1) * 4)
             for k, v in value.items():
                 lines.append(f"{indent}    {k}: {stringify(v, depth + 1)}")
-            return f"{{\n" + '\n'.join(lines) + f"\n{closing_indent}    }}"
+            return "{\n" + '\n'.join(lines) + "\n" + closing_indent + "    }"
         if value is None:
             return 'null'
         if isinstance(value, bool):

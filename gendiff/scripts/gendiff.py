@@ -16,7 +16,6 @@ def main():
     print(difference)
 
 
-
 if __name__ == '__main__':
     main()
 

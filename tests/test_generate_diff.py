@@ -1,6 +1,4 @@
 from gendiff.diff.generate_diff import generate_diff
-import os
-
 
 
 def test_generate_diff_yaml(tmp_path):
