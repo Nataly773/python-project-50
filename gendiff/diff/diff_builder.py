@@ -16,4 +16,4 @@ def build_diff(data1, data2):
             diff.append({'key': key, 'type': 'unchanged', 'value': data1[key]})
     return diff
 
-    return diff
+  

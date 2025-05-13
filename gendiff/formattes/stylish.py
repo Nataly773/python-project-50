@@ -26,4 +26,4 @@ def format_stylish(diff_tree, depth=0):
         elif type_ == "nested":
             children = format_stylish(item['children'], depth + 1)
             result.append(f"{indent}    {key}: {{\n{children}\n{indent}    }}")
-    return '\n'.join(result)
+    return "{\n" + "\n".join(result) + f"\n{indent}}}"
