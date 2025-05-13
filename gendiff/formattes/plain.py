@@ -19,7 +19,7 @@ def format_plain(diff_tree):
                     lines.append(f"Property '{full_path}' was added with value: {stringify(node['value'])}")
                 case 'removed':
                     lines.append(f"Property '{full_path}' was removed")
-                case 'updated':
+                case 'changed': 
                     lines.append(
                         f"Property '{full_path}' was updated. From {stringify(node['old_value'])} to {stringify(node['new_value'])}"
                     )
