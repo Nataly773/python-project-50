@@ -17,18 +17,37 @@ def format_stylish(diff_tree, depth=0):
     result = []
 
     for item in diff_tree:
-        key = item["key"]
-        type_ = item["type"]
-        if type_ == "added":
-            result.append(f"{indent}  + {key}: {stringify(item['value'], depth + 1)}")
-        elif type_ == "removed":
-            result.append(f"{indent}  - {key}: {stringify(item['value'], depth + 1)}")
-        elif type_ == "unchanged":
-            result.append(f"{indent}    {key}: {stringify(item['value'], depth + 1)}")
-        elif type_ == "changed":
-            result.append(f"{indent}  - {key}: {stringify(item['old_value'], depth + 1)}")
-            result.append(f"{indent}  + {key}: {stringify(item['new_value'], depth + 1)}")
-        elif type_ == "nested":
-            children = format_stylish(item['children'], depth + 1)
-            result.append(f"{indent}    {key}: {children}")
-    return "{\n" + "\n".join(result) + f"\n{indent}}}"
+    key = item["key"]
+    type_ = item["type"]
+
+    if type_ == "added":
+        result.append(
+            f"{indent}  + {key}: "
+            f"{stringify(item['value'], depth + 1)}"
+        )
+    elif type_ == "removed":
+        result.append(
+            f"{indent}  - {key}: "
+            f"{stringify(item['value'], depth + 1)}"
+        )
+    elif type_ == "unchanged":
+        result.append(
+            f"{indent}    {key}: "
+            f"{stringify(item['value'], depth + 1)}"
+        )
+    elif type_ == "changed":
+        result.append(
+            f"{indent}  - {key}: "
+            f"{stringify(item['old_value'], depth + 1)}"
+        )
+        result.append(
+            f"{indent}  + {key}: "
+            f"{stringify(item['new_value'], depth + 1)}"
+        )
+    elif type_ == "nested":
+        children = format_stylish(item['children'], depth + 1)
+        result.append(
+            f"{indent}    {key}: {children}"
+        )
+
+return "{\n" + "\n".join(result) + f"\n{indent}}}"
