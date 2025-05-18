@@ -9,6 +9,7 @@ def stringify(value):
         return str(value).lower()
     return str(value)
 
+
 def walk(tree, path=''):
     lines = []
     for node in tree:
@@ -36,6 +37,7 @@ def walk(tree, path=''):
                 lines.extend(walk(node['children'], full_path))
 
     return lines
+
 
 def format_plain(diff_tree):
     return '\n'.join(walk(diff_tree))
