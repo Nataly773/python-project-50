@@ -15,31 +15,53 @@ def format_stylish(diff_tree, depth=0):
         indent = ' ' * (depth * 4)
         closing_indent = ' ' * ((depth - 1) * 4)
         for k, v in value.items():
-            lines.append(f"{indent}    {k}: {stringify(v, depth + 1)}")
-        return "{\n" + '\n'.join(lines) + "\n" + closing_indent + "    }"
+            lines.append(
+                f"{indent}    {k}: {stringify(v, depth + 1)}"
+            )
+        return (
+            "{\n" + '\n'.join(lines) + "\n" + closing_indent + "    }"
+        )
 
     def process_added(item, depth):
         """Обрабатывает добавленные элементы."""
-        return f"{' ' * (depth * 4)}  + {item['key']}: {stringify(item['value'], depth + 1)}"
+        return (
+            f"{' ' * (depth * 4)}  + {item['key']}: "
+            f"{stringify(item['value'], depth + 1)}"
+        )
 
     def process_removed(item, depth):
         """Обрабатывает удалённые элементы."""
-        return f"{' ' * (depth * 4)}  - {item['key']}: {stringify(item['value'], depth + 1)}"
+        return (
+            f"{' ' * (depth * 4)}  - {item['key']}: "
+            f"{stringify(item['value'], depth + 1)}"
+        )
 
     def process_unchanged(item, depth):
         """Обрабатывает неизменённые элементы."""
-        return f"{' ' * (depth * 4)}    {item['key']}: {stringify(item['value'], depth + 1)}"
+        return (
+            f"{' ' * (depth * 4)}    {item['key']}: "
+            f"{stringify(item['value'], depth + 1)}"
+        )
 
     def process_changed(item, depth):
         """Обрабатывает изменённые элементы."""
-        old_value = f"{' ' * (depth * 4)}  - {item['key']}: {stringify(item['old_value'], depth + 1)}"
-        new_value = f"{' ' * (depth * 4)}  + {item['key']}: {stringify(item['new_value'], depth + 1)}"
+        indent = ' ' * (depth * 4)
+        old_value = (
+            f"{indent}  - {item['key']}: "
+            f"{stringify(item['old_value'], depth + 1)}"
+        )
+        new_value = (
+            f"{indent}  + {item['key']}: "
+            f"{stringify(item['new_value'], depth + 1)}"
+        )
         return old_value + '\n' + new_value
 
     def process_nested(item, depth):
         """Обрабатывает вложенные элементы."""
         children = format_stylish(item['children'], depth + 1)
-        return f"{' ' * (depth * 4)}    {item['key']}: {children}"
+        return (
+            f"{' ' * (depth * 4)}    {item['key']}: {children}"
+        )
 
     result = []
     for item in diff_tree:
