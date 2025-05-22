@@ -1,4 +1,6 @@
 from gendiff.diff.generate_diff import generate_diff
+from gendiff.diff.diff_builder import build_diff
+from gendiff.formattes.plain import format_plain
 
 
 def test_generate_diff_yaml(tmp_path):
@@ -29,3 +31,35 @@ verbose: true
 }"""
 
     assert generate_diff(str(file1), str(file2)) == expected
+
+def test_build_diff():
+    dict1 = {"a": 1, "b": 2}
+    dict2 = {"b": 3, "c": 4}
+
+    expected = [
+        {"key": "a", "type": "removed", "value": 1},
+        {"key": "b", "type": "changed", "old_value": 2, "new_value": 3},
+        {"key": "c", "type": "added", "value": 4},
+    ]
+    
+    assert build_diff(dict1, dict2) == expected
+
+def test_format_plain():
+    diff = [
+        {'key': 'host', 'type': 'unchanged', 'value': 'hexlet.io'},
+        {'key': 'timeout', 'type': 'changed', 'old_value': 50, 'new_value': 20},
+        {'key': 'proxy', 'type': 'removed', 'value': '123.234.53.22'},
+        {'key': 'verbose', 'type': 'added', 'value': True},
+        {'key': 'group', 'type': 'nested', 'children': [
+            {'key': 'name', 'type': 'added', 'value': {'a': 1}}
+        ]}
+    ]
+
+    expected = (
+        "Property 'timeout' was updated. From 50 to 20\n"
+        "Property 'proxy' was removed\n"
+        "Property 'verbose' was added with value: true\n"
+        "Property 'group.name' was added with value: [complex value]"
+    )
+
+    assert format_plain(diff) == expected
