@@ -32,6 +32,7 @@ verbose: true
 
     assert generate_diff(str(file1), str(file2)) == expected
 
+
 def test_build_diff():
     dict1 = {"a": 1, "b": 2}
     dict2 = {"b": 3, "c": 4}
@@ -43,6 +44,7 @@ def test_build_diff():
     ]
     
     assert build_diff(dict1, dict2) == expected
+
 
 def test_format_plain():
     diff = [
