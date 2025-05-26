@@ -56,6 +56,7 @@ def test_format_plain():
         {'key': 'group', 'type': 'nested', 'children': [
             {'key': 'name', 'type': 'added', 'value': {'a': 1}}
         ]}
+    
     ]
 
     expected = (
