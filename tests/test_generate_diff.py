@@ -46,7 +46,7 @@ def test_build_diff():
     
     assert build_diff(dict1, dict2) == expected
 
-
+# Using a hardcoded IP address is safe here because it is a known and fixed address of an internal test service.
 TEST_PROXY_IP = os.getenv('TEST_PROXY_IP', '123.234.53.22')
 
 
