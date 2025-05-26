@@ -59,7 +59,7 @@ def test_format_plain():
             {'key': 'name', 'type': 'added', 'value': {'a': 1}}
         ]}
     ]
-    ]
+    
 
     expected = (
         "Property 'timeout' was updated. From 50 to 20\n"
