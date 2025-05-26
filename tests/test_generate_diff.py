@@ -49,6 +49,7 @@ def test_build_diff():
 
 TEST_PROXY_IP = os.getenv('TEST_PROXY_IP', '123.234.53.22')
 
+
 def test_format_plain():
     diff = [
         {'key': 'host', 'type': 'unchanged', 'value': 'hexlet.io'},
@@ -60,7 +61,6 @@ def test_format_plain():
         ]}
     ]
     
-
     expected = (
         "Property 'timeout' was updated. From 50 to 20\n"
         "Property 'proxy' was removed\n"
