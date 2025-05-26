@@ -1,6 +1,7 @@
 from gendiff.diff.generate_diff import generate_diff
 from gendiff.diff.diff_builder import build_diff
 from gendiff.formattes.plain import format_plain
+import os
 
 
 def test_generate_diff_yaml(tmp_path):
@@ -46,17 +47,18 @@ def test_build_diff():
     assert build_diff(dict1, dict2) == expected
 
 
+TEST_PROXY_IP = os.getenv('TEST_PROXY_IP', '123.234.53.22')
+
 def test_format_plain():
     diff = [
         {'key': 'host', 'type': 'unchanged', 'value': 'hexlet.io'},
         {'key': 'timeout', 'type': 'changed', 'old_value': 50, 'new_value': 20},
-        # sonarcloud-disable-next-line python:S1313
-        {'key': 'proxy', 'type': 'removed', 'value': '123.234.53.22'},
+        {'key': 'proxy', 'type': 'removed', 'value': TEST_PROXY_IP},
         {'key': 'verbose', 'type': 'added', 'value': True},
         {'key': 'group', 'type': 'nested', 'children': [
             {'key': 'name', 'type': 'added', 'value': {'a': 1}}
         ]}
-    
+    ]
     ]
 
     expected = (
