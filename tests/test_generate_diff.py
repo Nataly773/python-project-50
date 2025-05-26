@@ -50,6 +50,7 @@ def test_format_plain():
     diff = [
         {'key': 'host', 'type': 'unchanged', 'value': 'hexlet.io'},
         {'key': 'timeout', 'type': 'changed', 'old_value': 50, 'new_value': 20},
+        # sonarcloud-disable-next-line python:S1313
         {'key': 'proxy', 'type': 'removed', 'value': '123.234.53.22'},
         {'key': 'verbose', 'type': 'added', 'value': True},
         {'key': 'group', 'type': 'nested', 'children': [
