@@ -1,11 +1,5 @@
-from gendiff.diff.generate_diff import generate_diff
-from gendiff.diff.diff_builder import build_diff
-from gendiff.formattes.plain import format_plain
-import os
 from pathlib import Path
-
-
-from gendiff import generate_diff
+from gendiff.diff.generate_diff import generate_diff
 
 def test_generate_diff_yaml():
     base_path = Path(__file__).parent / 'test_data'
@@ -21,12 +15,13 @@ def test_generate_diff_yaml():
   + verbose: true
 }"""
 
-    assert generate_diff(file1, file2) == expected_output
+    assert generate_diff(str(file1), str(file2)) == expected_output
+
 
 def test_generate_diff_rec_yaml():
-    base_path = os.path.join(os.path.dirname(__file__), 'test_data')
-    file1 = os.path.join(base_path, 'rec_file1.yml')
-    file2 = os.path.join(base_path, 'rec_file2.yml')
+    base_path = Path(__file__).parent / 'test_data'
+    file1 = base_path / 'rec_file1.yml'
+    file2 = base_path / 'rec_file2.yml'
 
     expected = """{
     common: {
@@ -73,14 +68,13 @@ def test_generate_diff_rec_yaml():
     }
 }"""
 
-    assert generate_diff(file1, file2) == expected
-
+    assert generate_diff(str(file1), str(file2)) == expected
 
 
 def test_generate_diff_plain():
-    base_path = os.path.join(os.path.dirname(__file__), 'test_data')
-    file1 = os.path.join(base_path, 'rec_file1.json')
-    file2 = os.path.join(base_path, 'rec_file2.json')
+    base_path = Path(__file__).parent / 'test_data'
+    file1 = base_path / 'rec_file1.json'
+    file2 = base_path / 'rec_file2.json'
 
     expected = """\
 Property 'common.follow' was added with value: false
@@ -95,5 +89,5 @@ Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]"""
 
-    result = generate_diff(file1, file2, format_name='plain')
+    result = generate_diff(str(file1), str(file2), format_name='plain')
     assert result == expected
