@@ -1,17 +1,16 @@
-import pytest
 from gendiff.diff.generate_diff import generate_diff
 from gendiff.diff.diff_builder import build_diff
 from gendiff.formattes.plain import format_plain
 import os
+from pathlib import Path
 
 
 from gendiff import generate_diff
 
 def test_generate_diff_yaml():
-    base_path = os.path.join(os.path.dirname(__file__), 'test_data')
-
-    file1 = os.path.join(base_path, 'file1.yml')
-    file2 = os.path.join(base_path, 'file2.yml')
+    base_path = Path(__file__).parent / 'test_data'
+    file1 = base_path / 'file1.yml'
+    file2 = base_path / 'file2.yml'
 
     expected_output = """{
   - follow: false
