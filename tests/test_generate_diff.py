@@ -1,6 +1,7 @@
 from pathlib import Path
 from gendiff.diff.generate_diff import generate_diff
 
+
 def test_generate_diff_yaml():
     base_path = Path(__file__).parent / 'test_data'
     file1 = base_path / 'file1.yml'
