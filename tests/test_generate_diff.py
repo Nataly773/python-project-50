@@ -1,5 +1,7 @@
 from pathlib import Path
 from gendiff.diff.generate_diff import generate_diff
+import json
+import os
 
 
 def test_generate_diff_yaml():
@@ -92,3 +94,26 @@ Property 'group3' was added with value: [complex value]"""
 
     result = generate_diff(str(file1), str(file2), format_name='plain')
     assert result == expected
+
+
+def test_generate_diff_json_format():
+    base_path = os.path.join(os.path.dirname(__file__), 'test_data')
+    file1 = os.path.join(base_path, 'rec_file1.json')
+    file2 = os.path.join(base_path, 'rec_file2.json')
+
+    result = generate_diff(file1, file2, format_name='json')
+    result_data = json.loads(result)
+
+    assert isinstance(result_data, list)
+    assert result_data[0]['key'] == 'common'
+    assert result_data[0]['type'] == 'nested'
+
+    common_children = result_data[0]['children']
+    follow_item = next(item for item in common_children if item['key'] == 'follow')
+    assert follow_item['type'] == 'added'
+    assert follow_item['value'] is False
+
+    setting3 = next(item for item in common_children if item['key'] == 'setting3')
+    assert setting3['type'] == 'changed'
+    assert setting3['old_value'] is True
+    assert setting3['new_value'] is None
