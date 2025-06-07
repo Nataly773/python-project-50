@@ -109,11 +109,13 @@ def test_generate_diff_json_format():
     assert result_data[0]['type'] == 'nested'
 
     common_children = result_data[0]['children']
-    follow_item = next(item for item in common_children if item['key'] == 'follow')
+    follow_item = next(item for item in common_children 
+    if item['key'] == 'follow')
     assert follow_item['type'] == 'added'
     assert follow_item['value'] is False
 
-    setting3 = next(item for item in common_children if item['key'] == 'setting3')
+    setting3 = next(item for item in common_children 
+    if item['key'] == 'setting3')
     assert setting3['type'] == 'changed'
     assert setting3['old_value'] is True
     assert setting3['new_value'] is None
