@@ -18,13 +18,12 @@ jobs:
       - name: Upgrade pip and install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install uv pytest pytest-cov
-          # или pip install -r requirements.txt, если есть
+          pip install uv pytest pytest-cov ruff pyyaml
 
       - name: Run linter and tests
         run: |
           make check
-          pytest --cov=gendiff --cov-report=xml
+          make test-coverage
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
