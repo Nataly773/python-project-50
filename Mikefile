@@ -14,9 +14,10 @@ test-coverage:
 lint:
 	uv run ruff check
 
-check: lint test
+check: 
+	test lint
 
 build:
 	uv build
 
-.PHONY: install test lint check build
+.PHONY: install test lint selfcheck check build
