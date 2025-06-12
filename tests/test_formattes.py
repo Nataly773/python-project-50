@@ -10,6 +10,7 @@ def test_get_indent():
     assert stylish.get_indent(0) == ''
     assert stylish.get_indent(1) == '    '
     assert stylish.get_indent(3) == '            '
+    
 
 def test_stringify_simple():
     assert stylish.stringify(None, 0) == 'null'

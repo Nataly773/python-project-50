@@ -1,5 +1,4 @@
 import sys
-
 from gendiff.scripts.gendiff import main
 
 
@@ -13,7 +12,6 @@ def test_main_cli(monkeypatch, capsys, tmp_path):
 
     monkeypatch.setattr(sys, 'argv', ['gendiff', str(file1), str(file2)])
 
-   
     main()
 
     captured = capsys.readouterr()
