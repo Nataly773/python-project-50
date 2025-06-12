@@ -1,0 +1,6 @@
+[run]
+source = gendiff
+
+[report]
+omit =
+    */__init__.py
