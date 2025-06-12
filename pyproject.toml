@@ -21,8 +21,8 @@ packages = ["gendiff"]
 gendiff = "gendiff.scripts.gendiff:main" 
 
 
-[tool.pytest.ini_options]
-addopts = "--cov=gendiff --cov-report=xml"
+[tool:pytest]
+addopts = --cov=gendiff --cov-report=xml
 
 [project.optional-dependencies]
 test = [
