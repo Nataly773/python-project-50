@@ -15,16 +15,16 @@ jobs:
         with:
           python-version: '3.12'
           
-      - name: Install dependencies
+      - name: Upgrade pip and install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install uv pytest pytest-cov
-          # Если есть requirements.txt, можно вместо этого:
-          # pip install -r requirements.txt
-          
+          # или pip install -r requirements.txt, если есть
+
       - name: Run linter and tests
         run: |
-          make check || echo "No make check target"  # если Makefile есть
-          pytest --cov=gendiff --cov-report=xml || echo "Run tests directly"
+          make check
+          pytest --cov=gendiff --cov-report=xml
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
