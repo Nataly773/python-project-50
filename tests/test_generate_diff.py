@@ -2,8 +2,7 @@ from pathlib import Path
 from gendiff.scripts.diff.generate_diff import generate_diff
 import json
 import os
-from gendiff.scripts.diff.parse_file import parse_file  
-import yaml
+
 
 def test_generate_diff_yaml():
     base_path = Path(__file__).parent / 'test_data'
