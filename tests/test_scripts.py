@@ -1,5 +1,6 @@
 from gendiff.scripts.diff.diff_builder import build_diff
 
+
 def test_build_diff():
     data1 = {
         'host': 'hexlet.io',

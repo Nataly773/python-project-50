@@ -30,8 +30,10 @@ jobs:
 
       - name: Show coverage report
         run: |
-    echo "=== Coverage file location ==="
-    find . -name "coverage.xml"   
+          echo "=== Coverage file location ==="
+          find . -name "coverage.xml"
+          echo "=== Preview of coverage.xml ==="
+          head -n 50 coverage.xml || echo "coverage.xml not found or empty"
 
       - name: SonarQubeScan
         uses: SonarSource/sonarqube-scan-action@v5
