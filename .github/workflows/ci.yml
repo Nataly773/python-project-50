@@ -7,8 +7,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -43,4 +45,6 @@ jobs:
           args: >
             -Dsonar.projectKey=Nataly773_python-project-502
             -Dsonar.organization=nataly773
+            -Dsonar.sources=gendiff
+            -Dsonar.exclusions=tests/
             -Dsonar.python.coverage.reportPaths=coverage.xml
